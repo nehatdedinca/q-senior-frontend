@@ -3,6 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { CollectibleAsset } from '../../../../models/collectible-asset';
 import { TrendChartComponent, ChartPoint } from '../../../../components/trend-chart/trend-chart.component';
+import { CHART_COLORS } from '../../../../constants/chart-colors';
 
 /** Compact axis-friendly currency label, e.g. 48_500_000 -> "$48.5M". */
 function formatCompactCurrency(value: number, currency: string): string {
@@ -24,6 +25,9 @@ function formatCompactCurrency(value: number, currency: string): string {
 })
 export class PerformanceAnalyticsComponent {
   asset = input.required<CollectibleAsset>();
+
+  protected readonly valuationColor = CHART_COLORS.gold;
+  protected readonly benchmarkColor = CHART_COLORS.blueAccent;
 
   protected valuationPoints = computed<ChartPoint[]>(() =>
     this.asset().valuationHistory.map((p) => ({ label: `${p.year}`, value: p.value }))

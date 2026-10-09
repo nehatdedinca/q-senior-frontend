@@ -1,0 +1,62 @@
+// =============================================================================
+// Design tokens: colors
+// -----------------------------------------------------------------------------
+// Single source of truth for every color used across the app. `src/styles` is
+// registered as a Sass include path (see angular.json `stylePreprocessorOptions`),
+// so any component stylesheet can import this regardless of its folder depth:
+//
+//   @use 'colors';
+//   .foo { color: colors.$text-strong; }
+//
+// Two kinds of tokens are defined:
+//  1. Named brand/neutral colors (solid, meaningful names) - use these directly.
+//  2. A reusable black/white opacity scale ("ink" on light surfaces, "snow" on
+//     dark surfaces) for the countless translucent text/border/surface shades
+//     the UI needs. Reach for one of these before reaching for a raw rgba().
+//     For one-off tints of a *brand* color (e.g. a 45%-opacity gold), compute it
+//     at the call site with `rgba(colors.$gold, 0.45)` rather than adding a new
+//     named token - the brand color itself still only lives in one place.
+// =============================================================================
+
+// ---- Brand / accent ----------------------------------------------------------
+$gold: #c9a227; // primary accent: category labels, active carousel dot, KPI highlight
+$blue-accent: #4c6ef5; // secondary chart series (e.g. benchmark bars)
+$green: #4caf50; // success / positive state icon
+$green-dark: #2e7d32; // positive KPI value text (darker, more legible on white)
+
+// ---- Neutrals / surfaces -------------------------------------------------------
+$white: #fff;
+$black: #000;
+$near-black: #15151a; // asset header dark background
+$carousel-gradient-start: #1b1b1f;
+$carousel-gradient-end: #2c2c33;
+
+// Legacy CSS named colors kept as-is for now (see Task notes / "further
+// improvements" - these don't match the $gold/$near-black brand palette above
+// and are good candidates for a follow-up visual pass).
+$legacy-border-gray: gray; // app shell nav-list border
+$legacy-active-link-bg: lightblue; // app shell active route background
+
+// ---- "Ink" scale: black at increasing opacity, for text/borders/surfaces on
+//      light backgrounds. Named by their opacity percentage.
+$ink-03: rgba($black, 0.03);
+$ink-08: rgba($black, 0.08);
+$ink-10: rgba($black, 0.1);
+$ink-20: rgba($black, 0.2);
+$ink-30: rgba($black, 0.3);
+$ink-40: rgba($black, 0.4);
+$ink-45: rgba($black, 0.45);
+$ink-50: rgba($black, 0.5);
+$ink-55: rgba($black, 0.55);
+$ink-60: rgba($black, 0.6);
+$ink-65: rgba($black, 0.65);
+$ink-70: rgba($black, 0.7);
+$ink-75: rgba($black, 0.75);
+
+// ---- "Snow" scale: white at increasing opacity, for text/borders/surfaces on
+//      dark backgrounds (e.g. the asset header, carousel).
+$snow-12: rgba($white, 0.12);
+$snow-40: rgba($white, 0.4);
+$snow-55: rgba($white, 0.55);
+$snow-65: rgba($white, 0.65);
+$snow-85: rgba($white, 0.85);

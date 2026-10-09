@@ -25,7 +25,7 @@
     <app-trend-chart
       [points]="valuationPoints()"
       type="area"
-      color="#c9a227"
+      [color]="valuationColor"
       [valueFormatter]="currencyFormatter"
     ></app-trend-chart>
   </div>
@@ -35,7 +35,7 @@
     <app-trend-chart
       [points]="benchmarkPoints()"
       type="bar"
-      color="#4c6ef5"
+      [color]="benchmarkColor"
       [valueFormatter]="percentFormatter"
     ></app-trend-chart>
   </div>

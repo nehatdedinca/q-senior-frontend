@@ -1,6 +1,8 @@
+@use 'colors';
+
 :host {
   .mat-mdc-nav-list {
-    border-bottom: 1px solid gray
+    border-bottom: 1px solid colors.$legacy-border-gray
   }
 
   .mat-expansion-panel {
@@ -14,7 +16,7 @@
     display: flex;
 
     a.active {
-      background: lightblue;
+      background: colors.$legacy-active-link-bg;
     }
   }
 }

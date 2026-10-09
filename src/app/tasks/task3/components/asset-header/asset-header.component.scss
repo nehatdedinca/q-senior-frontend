@@ -1,3 +1,5 @@
+@use 'colors';
+
 :host {
   display: block;
 }
@@ -6,8 +8,8 @@
   display: grid;
   grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
   gap: 24px;
-  background: #15151a;
-  color: #fff;
+  background: colors.$near-black;
+  color: colors.$white;
   border-radius: 16px;
   padding: 24px;
 
@@ -30,7 +32,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 12px;
-    color: #c9a227;
+    color: colors.$gold;
     font-weight: 600;
   }
 
@@ -43,7 +45,7 @@
 
   &__subtitle {
     margin: 0 0 12px;
-    color: rgba(255, 255, 255, 0.65);
+    color: colors.$snow-65;
     font-size: 14px;
   }
 
@@ -52,17 +54,17 @@
     flex-direction: column;
     gap: 2px;
     padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid colors.$snow-12;
   }
 
   &__value-label {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.55);
+    color: colors.$snow-55;
   }
 
   &__value-amount {
     font-size: clamp(26px, 4vw, 38px);
     font-weight: 700;
-    color: #c9a227;
+    color: colors.$gold;
   }
 }

@@ -1,3 +1,5 @@
+@use 'colors';
+
 :host {
   display: block;
 }
@@ -9,7 +11,7 @@
   min-height: 320px;
   border-radius: 12px;
   overflow: hidden;
-  background: linear-gradient(135deg, #1b1b1f 0%, #2c2c33 100%);
+  background: linear-gradient(135deg, colors.$carousel-gradient-start 0%, colors.$carousel-gradient-end 100%);
 
   &__slide {
     position: relative;
@@ -38,7 +40,7 @@
       font-size: 96px;
       width: 96px;
       height: 96px;
-      color: rgba(201, 162, 39, 0.45);
+      color: rgba(colors.$gold, 0.45);
     }
   }
 
@@ -50,16 +52,16 @@
     padding: 10px 16px;
     font-size: 13px;
     letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.85);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+    color: colors.$snow-85;
+    background: linear-gradient(to top, colors.$ink-55, transparent);
   }
 
   &__nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: #fff;
-    background: rgba(0, 0, 0, 0.3);
+    color: colors.$white;
+    background: colors.$ink-30;
 
     &--prev {
       left: 8px;
@@ -85,10 +87,10 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.4);
+    background: colors.$snow-40;
 
     &--active {
-      background: #c9a227;
+      background: colors.$gold;
     }
   }
 }

@@ -1,3 +1,5 @@
+@use 'colors';
+
 :host {
   display: grid;
   height: 100%;
@@ -12,7 +14,7 @@
 
   .selection-summary {
     margin-left: auto;
-    color: rgba(0, 0, 0, 0.6);
+    color: colors.$ink-60;
     font-size: 13px;
   }
 }

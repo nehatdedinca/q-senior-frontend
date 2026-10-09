@@ -1,3 +1,5 @@
+@use 'colors';
+
 :host {
   display: block;
   width: 100%;
@@ -14,23 +16,23 @@
   overflow: visible;
 
   &__gridline {
-    stroke: rgba(0, 0, 0, 0.08);
+    stroke: colors.$ink-08;
     stroke-width: 1;
   }
 
   &__baseline {
-    stroke: rgba(0, 0, 0, 0.2);
+    stroke: colors.$ink-20;
     stroke-width: 1;
   }
 
   &__axis-label {
     font-size: 9px;
-    fill: rgba(0, 0, 0, 0.45);
+    fill: colors.$ink-45;
   }
 
   &__x-label {
     font-size: 9px;
-    fill: rgba(0, 0, 0, 0.55);
+    fill: colors.$ink-55;
   }
 
   &__area {
@@ -43,7 +45,7 @@
   }
 
   &__point {
-    stroke: #fff;
+    stroke: colors.$white;
     stroke-width: 1;
   }
 
@@ -60,6 +62,6 @@
   &__bar-value {
     font-size: 10px;
     font-weight: 600;
-    fill: rgba(0, 0, 0, 0.75);
+    fill: colors.$ink-75;
   }
 }

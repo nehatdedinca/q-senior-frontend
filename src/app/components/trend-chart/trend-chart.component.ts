@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { CHART_COLORS } from '../../constants/chart-colors';
 
 export interface ChartPoint {
   label: string;
@@ -41,7 +42,7 @@ const PADDING = { top: 16, right: 16, bottom: 28, left: 16 };
 export class TrendChartComponent {
   points = input.required<ChartPoint[]>();
   type = input<'area' | 'bar'>('area');
-  color = input('#c9a227');
+  color = input<string>(CHART_COLORS.gold);
   valueFormatter = input<(value: number) => string>((value) => `${value}`);
 
   protected readonly viewBox = `0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`;

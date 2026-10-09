@@ -1,3 +1,5 @@
+@use 'colors';
+
 :host {
   display: block;
 }
@@ -14,7 +16,7 @@
   &__subtitle {
     margin: 0 0 16px;
     font-size: 13px;
-    color: rgba(0, 0, 0, 0.55);
+    color: colors.$ink-55;
   }
 
   &__table {
