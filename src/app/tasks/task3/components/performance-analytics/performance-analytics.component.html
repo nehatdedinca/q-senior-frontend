@@ -1,0 +1,42 @@
+<mat-card class="performance" appearance="outlined">
+  <h2 class="performance__title">Performance Analytics</h2>
+
+  <div class="performance__kpis">
+    <div class="kpi">
+      <span class="kpi__label">Current value</span>
+      <span class="kpi__value">{{ currencyFormatter(asset().currentValue) }}</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi__label">Total return</span>
+      <span class="kpi__value kpi__value--positive">+{{ totalReturnPct() | number: '1.0-1' }}%</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi__label">CAGR</span>
+      <span class="kpi__value kpi__value--positive">+{{ cagrPct() | number: '1.1-1' }}%</span>
+    </div>
+    <div class="kpi">
+      <span class="kpi__label">Unrealized gain</span>
+      <span class="kpi__value kpi__value--positive">{{ currencyFormatter(unrealizedGain()) }}</span>
+    </div>
+  </div>
+
+  <div class="performance__chart">
+    <h3 class="performance__chart-title">Valuation over time</h3>
+    <app-trend-chart
+      [points]="valuationPoints()"
+      type="area"
+      color="#c9a227"
+      [valueFormatter]="currencyFormatter"
+    ></app-trend-chart>
+  </div>
+
+  <div class="performance__chart">
+    <h3 class="performance__chart-title">Annualized return vs. benchmarks</h3>
+    <app-trend-chart
+      [points]="benchmarkPoints()"
+      type="bar"
+      color="#4c6ef5"
+      [valueFormatter]="percentFormatter"
+    ></app-trend-chart>
+  </div>
+</mat-card>

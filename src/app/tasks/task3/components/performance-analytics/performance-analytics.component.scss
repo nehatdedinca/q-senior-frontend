@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  align-self: start;
+}
+
+.performance {
+  padding: 20px 24px;
+  box-sizing: border-box;
+
+  &__title {
+    margin: 0 0 16px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  &__chart {
+    margin-top: 24px;
+  }
+
+  &__chart-title {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.65);
+    text-align: center;
+  }
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.03);
+
+  &__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__value {
+    font-size: 20px;
+    font-weight: 700;
+
+    &--positive {
+      color: #2e7d32;
+    }
+  }
+}
