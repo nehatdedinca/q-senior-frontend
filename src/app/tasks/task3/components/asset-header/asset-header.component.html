@@ -1,0 +1,18 @@
+<header class="asset-header">
+  <div class="asset-header__media">
+    <app-carousel [slides]="asset().images"></app-carousel>
+  </div>
+
+  <div class="asset-header__info">
+    <span class="asset-header__category">{{ asset().category }}</span>
+    <h1 class="asset-header__name">{{ asset().name }}</h1>
+    <p class="asset-header__subtitle">{{ asset().subtitle }}</p>
+
+    <div class="asset-header__value">
+      <span class="asset-header__value-label">Current estimated value</span>
+      <span class="asset-header__value-amount">
+        {{ asset().currentValue | currency: asset().currency : 'symbol' : '1.0-0' }}
+      </span>
+    </div>
+  </div>
+</header>
