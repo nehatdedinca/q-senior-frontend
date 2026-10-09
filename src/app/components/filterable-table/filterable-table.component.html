@@ -1,7 +1,6 @@
-<!-- Feel free to replace this placeholder with your filterbar -->
-<fieldset class="filter-bar-placeholder">
-  <legend>Filter bar should go here</legend>
-</fieldset>
+<!-- Slot for a filter bar (e.g. <filter-bar filterBar ...>); FilterableTableComponent has
+     no compile-time dependency on whatever is projected here. -->
+<ng-content select="[filterBar]"></ng-content>
 
 <div class="table-wrapper">
   @if (isLoading) {
@@ -13,4 +12,15 @@
   <table mat-table [dataSource]="dataSource ?? []" class="mat-elevation-z8">
     <ng-content></ng-content>
   </table>
+
+  @if (totalCount !== null) {
+    <mat-paginator
+      [length]="totalCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="pageIndex"
+      (page)="page.emit($event)"
+      showFirstLastButtons
+    ></mat-paginator>
+  }
 </div>

@@ -2,7 +2,17 @@
   class="security-list"
   [dataSource]="securities$ | async"
   [isLoading]="loadingSecurities$ | async"
+  [totalCount]="(totalCount$ | async) ?? 0"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  (page)="onPage($event)"
 >
+  <filter-bar
+    filterBar
+    [fields]="(filterFields$ | async) ?? []"
+    (filterChange)="onFilterChange($event)"
+  ></filter-bar>
+
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let security">{{ security.name }}</td>
@@ -18,12 +28,17 @@
     <td mat-cell *matCellDef="let security">{{ security.currency }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="isPrivate">
+    <th mat-header-cell *matHeaderCellDef>Visibility</th>
+    <td mat-cell *matCellDef="let security">{{ security.isPrivate ? 'Private' : 'Public' }}</td>
+  </ng-container>
+
   <!-- Custom row definitions to be provided to the wrapper table. -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
   <!-- Row shown when there is no matching data that will be provided to the wrapper table. -->
   <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="3"><i>No data</i></td>
+    <td class="mat-cell" colspan="4"><i>No data</i></td>
   </tr>
 </filterable-table>
