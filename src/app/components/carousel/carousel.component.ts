@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   computed,
-  inject,
+  effect,
   input,
   signal,
 } from '@angular/core';
@@ -33,17 +32,21 @@ export class CarouselComponent {
   protected activeSlide = computed(() => this.slides()[this.activeIndex()] ?? null);
 
   private readonly _paused = signal(false);
-  private readonly _destroyRef = inject(DestroyRef);
 
   constructor() {
-    const intervalMs = this.autoplayMs();
-    if (intervalMs > 0) {
+    // `effect()` re-runs whenever `autoplayMs()` changes, and its `onCleanup` callback both
+    // clears the previous interval on re-run and on component destroy - unlike reading the
+    // input once in the constructor, this correctly reflects the *bound* input value.
+    effect((onCleanup) => {
+      const intervalMs = this.autoplayMs();
+      if (intervalMs <= 0) return;
+
       const timer = setInterval(() => {
         if (this._paused() || this.slides().length <= 1) return;
         this.next();
       }, intervalMs);
-      this._destroyRef.onDestroy(() => clearInterval(timer));
-    }
+      onCleanup(() => clearInterval(timer));
+    });
   }
 
   protected goTo(index: number): void {
