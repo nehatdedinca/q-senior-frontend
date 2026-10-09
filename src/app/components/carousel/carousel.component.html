@@ -1,0 +1,51 @@
+<div
+  class="carousel"
+  (mouseenter)="pause()"
+  (mouseleave)="resume()"
+>
+  @if (activeSlide(); as slide) {
+    <div class="carousel__slide">
+      @if (slide.imageUrl) {
+        <img [src]="slide.imageUrl" [alt]="slide.caption" />
+      } @else {
+        <div class="carousel__placeholder">
+          <mat-icon>{{ slide.icon ?? 'image' }}</mat-icon>
+        </div>
+      }
+      <div class="carousel__caption">{{ slide.caption }}</div>
+    </div>
+  }
+
+  @if (slides().length > 1) {
+    <button
+      mat-icon-button
+      type="button"
+      class="carousel__nav carousel__nav--prev"
+      aria-label="Previous slide"
+      (click)="previous()"
+    >
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      type="button"
+      class="carousel__nav carousel__nav--next"
+      aria-label="Next slide"
+      (click)="next()"
+    >
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+
+    <div class="carousel__dots">
+      @for (slide of slides(); track slide.caption; let i = $index) {
+        <button
+          type="button"
+          class="carousel__dot"
+          [class.carousel__dot--active]="i === activeIndex()"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+          (click)="goTo(i)"
+        ></button>
+      }
+    </div>
+  }
+</div>
