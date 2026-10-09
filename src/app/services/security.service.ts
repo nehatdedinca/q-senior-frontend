@@ -12,12 +12,36 @@ export class SecurityService {
    * Get Securities server request mock
    * */
   getSecurities(securityFilter?: SecuritiesFilter): Observable<Security[]> {
+    const skip = securityFilter?.skip ?? 0;
+    const limit = securityFilter?.limit ?? 100;
     const filteredSecurities = this._filterSecurities(securityFilter).slice(
-      securityFilter?.skip ?? 0,
-      securityFilter?.limit ?? 100
+      skip,
+      skip + limit
     );
 
     return of(filteredSecurities).pipe(delay(1000));
+  }
+
+  /**
+   * Returns the total number of securities matching the given filter (ignoring paging),
+   * needed by the UI to render pagination controls for server-side paging.
+   * */
+  getSecuritiesCount(securityFilter?: SecuritiesFilter): Observable<number> {
+    return of(this._filterSecurities(securityFilter).length).pipe(delay(300));
+  }
+
+  /** Distinct security types available, used to populate filter options. */
+  getSecurityTypes(): Observable<string[]> {
+    return of(this._distinct((s) => s.type)).pipe(delay(300));
+  }
+
+  /** Distinct security currencies available, used to populate filter options. */
+  getSecurityCurrencies(): Observable<string[]> {
+    return of(this._distinct((s) => s.currency)).pipe(delay(300));
+  }
+
+  private _distinct(selector: (security: Security) => string): string[] {
+    return Array.from(new Set(SECURITIES.map(selector))).sort();
   }
 
   private _filterSecurities(
