@@ -1,0 +1,52 @@
+<form [formGroup]="form" class="filter-bar">
+  @for (field of fields; track field.key) {
+    <div class="filter-bar__field">
+      @switch (field.type) {
+        @case ('text') {
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [formControlName]="field.key" [placeholder]="field.placeholder ?? ''" />
+          </mat-form-field>
+        }
+        @case ('select') {
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControlName]="field.key">
+              <mat-option [value]="null">All</mat-option>
+              @for (option of field.options; track option.value) {
+                <mat-option [value]="option.value">{{ option.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
+        @case ('multiselect') {
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControlName]="field.key" multiple>
+              @for (option of field.options; track option.value) {
+                <mat-option [value]="option.value">{{ option.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
+        @case ('tri-state') {
+          <span class="filter-bar__label">{{ field.label }}</span>
+          <mat-button-toggle-group [formControlName]="field.key" aria-label="field.label">
+            <mat-button-toggle [value]="null">All</mat-button-toggle>
+            @for (option of field.options; track option.value) {
+              <mat-button-toggle [value]="option.value">{{ option.label }}</mat-button-toggle>
+            }
+          </mat-button-toggle-group>
+        }
+        @case ('boolean') {
+          <mat-checkbox [formControlName]="field.key">{{ field.label }}</mat-checkbox>
+        }
+      }
+    </div>
+  }
+
+  <button mat-stroked-button type="button" class="filter-bar__reset" (click)="reset()">
+    <mat-icon>clear</mat-icon>
+    Reset
+  </button>
+</form>
