@@ -1,0 +1,27 @@
+<mat-card class="asset-details" appearance="outlined">
+  <h2 class="asset-details__title">Asset Details</h2>
+
+  <div class="asset-details__facts">
+    @for (fact of asset().facts; track fact.label) {
+      <div class="fact">
+        <mat-icon class="fact__icon">{{ fact.icon }}</mat-icon>
+        <div class="fact__text">
+          <div class="fact__label">{{ fact.label }}</div>
+          <div class="fact__value">{{ fact.value }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="asset-details__condition">
+    <mat-icon>check_circle</mat-icon>
+    <span>{{ asset().condition }}</span>
+  </div>
+
+  <h3 class="asset-details__subtitle">Provenance</h3>
+  <ol class="asset-details__provenance">
+    @for (item of asset().provenance; track item) {
+      <li>{{ item }}</li>
+    }
+  </ol>
+</mat-card>
