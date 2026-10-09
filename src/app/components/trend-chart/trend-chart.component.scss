@@ -1,0 +1,65 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chart {
+  width: 100%;
+  // Keep the viewBox's own aspect ratio so the chart scales uniformly on wide screens
+  // instead of stretching horizontally (which previously dragged/distorted the text labels).
+  aspect-ratio: 600 / 260;
+  height: auto;
+  max-height: 320px;
+  display: block;
+  overflow: visible;
+
+  &__gridline {
+    stroke: rgba(0, 0, 0, 0.08);
+    stroke-width: 1;
+  }
+
+  &__baseline {
+    stroke: rgba(0, 0, 0, 0.2);
+    stroke-width: 1;
+  }
+
+  &__axis-label {
+    font-size: 9px;
+    fill: rgba(0, 0, 0, 0.45);
+  }
+
+  &__x-label {
+    font-size: 9px;
+    fill: rgba(0, 0, 0, 0.55);
+  }
+
+  &__area {
+    opacity: 0.18;
+  }
+
+  &__line {
+    fill: none;
+    stroke-width: 2;
+  }
+
+  &__point {
+    stroke: #fff;
+    stroke-width: 1;
+  }
+
+  &__bar {
+    rx: 3%;
+    opacity: 0.85;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__bar-value {
+    font-size: 10px;
+    font-weight: 600;
+    fill: rgba(0, 0, 0, 0.75);
+  }
+}

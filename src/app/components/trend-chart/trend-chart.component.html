@@ -1,0 +1,41 @@
+<svg [attr.viewBox]="viewBox" class="chart" preserveAspectRatio="xMidYMid meet" role="img">
+  <!-- Gridlines + value labels -->
+  @for (line of gridLines(); track line.y) {
+    <line class="chart__gridline" x1="16" [attr.y1]="line.y" [attr.x2]="600 - 16" [attr.y2]="line.y"></line>
+    <text class="chart__axis-label" x="18" [attr.y]="line.y - 4">{{ line.label }}</text>
+  }
+
+  @if (type() === 'area') {
+    <path class="chart__area" [attr.d]="areaPath()" [attr.fill]="color()"></path>
+    <path class="chart__line" [attr.d]="linePath()" [attr.stroke]="color()"></path>
+    @for (point of plottedPoints(); track point.label) {
+      <circle class="chart__point" [attr.cx]="point.x" [attr.cy]="point.y" r="3" [attr.fill]="color()">
+        <title>{{ point.label }}: {{ valueFormatter()(point.value) }}</title>
+      </circle>
+      <text class="chart__x-label" [attr.x]="point.x" [attr.y]="baselineY + 18" text-anchor="middle">
+        {{ point.label }}
+      </text>
+    }
+  } @else {
+    @for (bar of bars(); track bar.label) {
+      <rect
+        class="chart__bar"
+        [attr.x]="bar.x"
+        [attr.y]="bar.y"
+        [attr.width]="bar.width"
+        [attr.height]="bar.height"
+        [attr.fill]="color()"
+      >
+        <title>{{ bar.label }}: {{ valueFormatter()(bar.value) }}</title>
+      </rect>
+      <text class="chart__bar-value" [attr.x]="bar.x + bar.width / 2" [attr.y]="bar.y - 6" text-anchor="middle">
+        {{ valueFormatter()(bar.value) }}
+      </text>
+      <text class="chart__x-label" [attr.x]="bar.x + bar.width / 2" [attr.y]="baselineY + 18" text-anchor="middle">
+        {{ bar.label }}
+      </text>
+    }
+  }
+
+  <line class="chart__baseline" x1="16" [attr.y1]="baselineY" [attr.x2]="600 - 16" [attr.y2]="baselineY"></line>
+</svg>
